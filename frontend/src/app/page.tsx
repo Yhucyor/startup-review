@@ -36,39 +36,37 @@ export default function AuthPage() {
   return (
     <div className={styles.container}>
       
-      {/* Left side: 3D Intro Section */}
+      {/* Left side: Futuristic Sci-Fi Intro */}
       <div className={styles.introSection}>
         <div className={styles.gridOverlay}></div>
+        <div className={styles.scanner}></div>
         
-        <div className={styles.scene}>
-          <div className={styles.cube}>
-            <div className={`${styles.face} ${styles.front}`}></div>
-            <div className={`${styles.face} ${styles.back}`}></div>
-            <div className={`${styles.face} ${styles.right}`}></div>
-            <div className={`${styles.face} ${styles.left}`}></div>
-            <div className={`${styles.face} ${styles.top}`}></div>
-            <div className={`${styles.face} ${styles.bottom}`}></div>
-          </div>
+        {/* Holographic AI Core Effect */}
+        <div className={styles.aiCore}>
+          <div className={`${styles.ring} ${styles.ring3}`}></div>
+          <div className={`${styles.ring} ${styles.ring2}`}></div>
+          <div className={`${styles.ring} ${styles.ring1}`}></div>
+          <div className={styles.orb}></div>
         </div>
 
         <div className={styles.introContent}>
-          <h1 className={styles.introTitle}>AI Native<br/>Commerce Copilot</h1>
+          <h1 className={styles.introTitle}>AI NATIVE<br/>COPILOT</h1>
           <p className={styles.introDesc}>
-            Trợ lý ảo tự động phân tích dữ liệu, tối ưu hóa gian hàng và điều phối hoạt động kinh doanh đa sàn cho doanh nghiệp của bạn.
+            Kích hoạt hệ thống mạng nơ-ron nhân tạo. Tự động hóa quy trình quản lý, tối ưu hoá danh mục và điều phối kinh doanh đa nền tảng với tốc độ tương lai.
           </p>
         </div>
       </div>
 
-      {/* Right side: Auth Form */}
+      {/* Right side: Cyberpunk style Auth Form */}
       <div className={styles.authSection}>
         <div className={`animate-fade-in ${styles.loginCard}`}>
           
           <div className={styles.header}>
             <div className={styles.logo}>
-              Bắt đầu ngay
+              HỆ THỐNG VẬN HÀNH
             </div>
             <p className={styles.subtitle}>
-              Đăng nhập để vào không gian làm việc
+              Xác thực truy cập không gian làm việc
             </p>
           </div>
 
@@ -97,19 +95,19 @@ export default function AuthPage() {
 
           <form className={styles.form} onSubmit={handleSubmit}>
             <div className="input-group">
-              <label className="input-label" htmlFor="email">Địa chỉ Email</label>
+              <label className="input-label" htmlFor="email" style={{color: 'rgba(255,255,255,0.7)'}}>MÃ ĐỊNH DANH (EMAIL)</label>
               <input 
                 id="email"
                 type="email" 
-                className="input-field" 
-                placeholder="ten@doanhnghiep.com" 
+                className={`input-field ${styles.passwordInput}`}
+                placeholder="system@corp.com" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
             <div className="input-group">
-              <label className="input-label" htmlFor="password">Mật khẩu</label>
+              <label className="input-label" htmlFor="password" style={{color: 'rgba(255,255,255,0.7)'}}>MÃ BẢO MẬT</label>
               <div className={styles.passwordWrapper}>
                 <input 
                   id="password"
@@ -131,13 +129,14 @@ export default function AuthPage() {
 
             <button 
               type="submit" 
-              className={`btn btn-primary ${styles.submitBtn}`}
+              className={styles.submitBtn}
               disabled={loading}
+              style={{ color: 'white', borderRadius: '8px', border: 'none', cursor: loading ? 'not-allowed' : 'pointer' }}
             >
               {loading ? (
-                <span>Đang xử lý...</span>
+                <span>ĐANG XÁC THỰC...</span>
               ) : (
-                <span>{isLogin ? "Đăng Nhập" : "Tạo Tài Khoản"}</span>
+                <span>{isLogin ? "BẮT ĐẦU KẾT NỐI" : "KHỞI TẠO TÀI KHOẢN"}</span>
               )}
             </button>
           </form>
