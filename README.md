@@ -30,7 +30,6 @@ Không xây chợ bán hàng cho người mua, không tự vận hành logistics
 
 ![Sơ đồ tổng quan hệ thống](docs/images/01-tong-quan-he-thong.png)
 
-> 💡 **Tài nguyên trực quan:** [Bản vector SVG độ nét cao](docs/images/01-tong-quan-he-thong.svg) · [Mở file sơ đồ HTML tương tác](docs/so-do-he-thong.html#system-title)  
 > *Diễn giải:* Người bán thao tác qua App → Bộ điều phối phân công 6 trợ lý AI → Kết quả qua cổng kiểm tra (Policy Gate) → Người bán duyệt (hoặc tự động nếu bật) → Worker gửi Shopee → Sàn trả đơn/kết quả → Cập nhật tồn kho theo quy tắc cố định & lưu dữ liệu bền vững.
 
 ## (2) Đối tượng sử dụng
@@ -67,7 +66,6 @@ Giao diện luôn cho biết **đang làm việc trong doanh nghiệp nào**. Kh
 
 ![Các module của nền tảng bán hàng đa sàn](docs/images/04-cac-module-nen-tang-da-san.png)
 
-> 💡 **Tài nguyên trực quan:** [Bản vector SVG độ nét cao](docs/images/04-cac-module-nen-tang-da-san.svg) · [Mở file sơ đồ HTML](docs/so-do-he-thong.html#expanded-modules)  
 > *Diễn giải:* Kiến trúc module gồm: Tenant Boundary (Account/Organization), Catalog (PIM dữ liệu gốc), AI Optimization (LangGraph + AI SDK), Marketplace Listing, External Adapters (Shopee, TikTok Shop, Lazada), Orders Aggregator, Customer Service, Analytics, và Xuất / Chuyển dữ liệu đơn.
 
 ## (4) Danh sách từng màn hình
@@ -237,14 +235,12 @@ Nếu chưa có khóa AI, giao diện vẫn cho tự viết và dùng một kế
 
 ![Luồng bên trong bộ điều phối agent](docs/images/03-luong-dieu-phoi-multi-agent.png)
 
-> 💡 **Tài nguyên trực quan:** [Bản vector SVG độ nét cao](docs/images/03-luong-dieu-phoi-multi-agent.svg)  
 > *Diễn giải:* Router chọn các nhánh độc lập (Content + Keyword) chạy song song; nhánh phụ thuộc (Localization) nhận kết quả Content trước khi chuyển ngữ. Review Agent đối chiếu bản cuối với dữ liệu gốc trước khi vào Policy Gate. Nhánh Exception Agent kích hoạt độc lập khi có lỗi sàn hoặc lỗi dữ liệu.
 
 ### Sơ đồ 4: Điều phối tối ưu hóa đa phương thức (Văn bản, Hình ảnh và Giá)
 
 ![Điều phối tối ưu văn bản hình ảnh và giá](docs/images/05-dieu-phoi-toi-uu-van-ban-hinh-anh-gia.png)
 
-> 💡 **Tài nguyên trực quan:** [Bản vector SVG độ nét cao](docs/images/05-dieu-phoi-toi-uu-van-ban-hinh-anh-gia.svg)  
 > *Diễn giải:* Pipeline 3 nhánh song song: Nhánh văn bản (Text Agents via AI SDK), Nhánh hình ảnh (Image Adaptation Agent + Photoroom/SD API + Canvas/Render worker), và Nhánh định giá (Pricing Suggestion Agent + Deterministic validation bằng code). Toàn bộ được gom thành Versioned Proposal trước khi chuyển qua Policy Gate và Worker thực thi.
 
 ## (10) Nếu có dữ liệu riêng thì dữ liệu lấy từ đâu?
@@ -366,7 +362,6 @@ Phần này dành cho Codex; người dùng app không cần hiểu các tên k�
 
 ![Kiến trúc điều phối và thực thi](docs/images/02-kien-truc-dieu-phoi-va-thuc-thi.png)
 
-> 💡 **Tài nguyên trực quan:** [Bản vector SVG độ nét cao](docs/images/02-kien-truc-dieu-phoi-va-thuc-thi.svg) · [Mở file sơ đồ HTML](docs/so-do-he-thong.html#technical)  
 > *Diễn giải:* Luồng sự kiện từ API intake → Giao dịch PostgreSQL với Transactional Outbox Pattern → Redis/BullMQ phân phối job → LangGraph JS điều phối workflow AI với state checkpoint → Policy Gate & Human Approval → Execution Worker kiểm tra lại và gọi Marketplace Adapters → State & Audit log ghi nhận kết quả.
 
 - Một kho mã TypeScript: **Next.js** cho frontend; **NestJS** cho API và nghiệp vụ; một hoặc nhiều **worker TypeScript** cho AI, đăng bài, nhập đơn và đồng bộ. Chia module tài khoản, doanh nghiệp, sản phẩm, bài đăng, AI, tự động hóa, kết nối sàn, đơn, tồn kho; chưa cần microservices.
