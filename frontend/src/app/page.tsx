@@ -37,16 +37,18 @@ export default function AuthPage() {
   return (
     <div className={styles.container}>
       
+      {/* Full Screen Background Effects */}
+      <Particles />
+      <div className={styles.starsContainer}>
+        <div className={styles.stars}></div>
+        <div className={`${styles.stars} ${styles.stars2}`}></div>
+        <div className={`${styles.stars} ${styles.stars3}`}></div>
+      </div>
+      <div className={styles.gridOverlay}></div>
+      <div className={styles.scanner}></div>
+
       {/* Left side: Futuristic Sci-Fi Intro */}
       <div className={styles.introSection}>
-        <Particles />
-        <div className={styles.starsContainer}>
-          <div className={styles.stars}></div>
-          <div className={`${styles.stars} ${styles.stars2}`}></div>
-          <div className={`${styles.stars} ${styles.stars3}`}></div>
-        </div>
-        <div className={styles.gridOverlay}></div>
-        <div className={styles.scanner}></div>
         
         {/* Holographic AI Core Effect */}
         <div className={styles.aiCore}>
