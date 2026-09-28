@@ -1,11 +1,122 @@
 .container {
   display: flex;
+  min-height: 100vh;
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+.introSection {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 40px;
+  background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+  border-right: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+/* Background 3D Grid Overlay */
+.gridOverlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  transform: perspective(500px) rotateX(60deg) translateY(-100px) scale(3);
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.scene {
+  width: 300px;
+  height: 300px;
+  perspective: 1000px;
+  margin-bottom: 60px;
+  z-index: 10;
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotate3d 20s infinite linear;
+}
+
+.face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  left: 50px;
+  top: 50px;
+  border: 1px solid rgba(168, 85, 247, 0.5);
+  background: rgba(99, 102, 241, 0.05);
+  box-shadow: 0 0 60px rgba(99, 102, 241, 0.2) inset, 0 0 20px rgba(168, 85, 247, 0.4);
+  backdrop-filter: blur(2px);
+  border-radius: 12%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  padding: 20px;
-  background: radial-gradient(circle at 50% -20%, var(--accent-glow), transparent 60%),
-              var(--bg-primary);
+}
+
+.face::after {
+  content: "AI";
+  font-family: var(--font-heading);
+  font-size: 64px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.1);
+}
+
+.front  { transform: translateZ(100px); }
+.back   { transform: rotateY(180deg) translateZ(100px); }
+.right  { transform: rotateY(90deg) translateZ(100px); }
+.left   { transform: rotateY(-90deg) translateZ(100px); }
+.top    { transform: rotateX(90deg) translateZ(100px); }
+.bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+@keyframes rotate3d {
+  0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  100% { transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg); }
+}
+
+.introContent {
+  text-align: center;
+  z-index: 10;
+  position: relative;
+}
+
+.introTitle {
+  font-family: var(--font-heading);
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #ffffff 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.introDesc {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 440px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+
+.authSection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
 }
 
 .loginCard {
@@ -15,6 +126,11 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  background: rgba(20, 20, 25, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
 }
 
 .header {
@@ -36,10 +152,11 @@
 
 .tabs {
   display: flex;
-  background: var(--bg-secondary);
+  background: rgba(0, 0, 0, 0.3);
   padding: 4px;
   border-radius: var(--radius-md);
   margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .tab {
@@ -110,4 +227,13 @@
   color: var(--error);
   font-size: 13px;
   text-align: center;
+}
+
+@media (max-width: 968px) {
+  .container {
+    flex-direction: column;
+  }
+  .introSection {
+    display: none;
+  }
 }
