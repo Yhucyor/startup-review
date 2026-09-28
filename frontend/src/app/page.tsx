@@ -38,6 +38,11 @@ export default function AuthPage() {
       
       {/* Left side: Futuristic Sci-Fi Intro */}
       <div className={styles.introSection}>
+        <div className={styles.starsContainer}>
+          <div className={styles.stars}></div>
+          <div className={`${styles.stars} ${styles.stars2}`}></div>
+          <div className={`${styles.stars} ${styles.stars3}`}></div>
+        </div>
         <div className={styles.gridOverlay}></div>
         <div className={styles.scanner}></div>
         

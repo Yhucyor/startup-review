@@ -18,6 +18,58 @@
   overflow: hidden;
 }
 
+/* Galaxy Stars */
+.starsContainer {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+.stars {
+  position: absolute;
+  top: -50%; left: -50%; width: 200%; height: 200%;
+  background: transparent;
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 240px 90px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 300px 200px, rgba(255,255,255,0.6), rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 400px 400px;
+  animation: starMove 60s linear infinite;
+  opacity: 0.5;
+}
+
+.stars2 {
+  background-image: 
+    radial-gradient(1.5px 1.5px at 50px 160px, rgba(255,255,255,0.9), rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 150px 240px, rgba(168,85,247,0.8), rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 350px 350px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 200px 50px, rgba(6,182,212,0.8), rgba(0,0,0,0));
+  background-size: 500px 500px;
+  animation: starMove 45s linear infinite;
+  opacity: 0.7;
+}
+
+.stars3 {
+  background-image: 
+    radial-gradient(2px 2px at 80px 80px, rgba(99,102,241,0.9), rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 280px 120px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2.5px 2.5px at 400px 300px, rgba(255,255,255,0.7), rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 120px 420px, rgba(168,85,247,0.8), rgba(0,0,0,0));
+  background-size: 600px 600px;
+  animation: starMove 30s linear infinite;
+}
+
+@keyframes starMove {
+  from { transform: translateY(0); }
+  to { transform: translateY(1000px); }
+}
+
 /* Futuristic Cyber Grid */
 .gridOverlay {
   position: absolute;
@@ -62,7 +114,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 60px;
+  margin-bottom: 140px; /* INCREASED to prevent overlapping with text */
   z-index: 10;
 }
 
