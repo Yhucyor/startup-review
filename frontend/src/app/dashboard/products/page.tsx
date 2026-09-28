@@ -2,6 +2,7 @@
 
 import styles from "./page.module.css";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const MOCK_PRODUCTS = [
   { id: 1, name: "Cà phê Rang Xay Nguyên Chất 250g", sku: "CF-250G", price: "85.000 ₫", stock: 120, status: "Đang bán", posts: 1 },
@@ -10,6 +11,7 @@ const MOCK_PRODUCTS = [
 ];
 
 export default function ProductsPage() {
+  const router = useRouter();
   return (
     <div className={`${styles.container} animate-fade-in`}>
       <div className={styles.header}>
@@ -43,7 +45,7 @@ export default function ProductsPage() {
           </thead>
           <tbody>
             {MOCK_PRODUCTS.map((prod) => (
-              <tr key={prod.id} className={styles.tr}>
+              <tr key={prod.id} className={styles.tr} onClick={() => router.push(`/dashboard/products/${prod.id}`)} style={{ cursor: 'pointer' }}>
                 <td className={styles.td}>
                   <div className={styles.productInfo}>
                     <div className={styles.productImage}>☕</div>
