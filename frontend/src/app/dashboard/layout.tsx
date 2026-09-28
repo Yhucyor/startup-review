@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import styles from "./layout.module.css";
 
@@ -26,8 +27,15 @@ export default function DashboardLayout({
     <div className={styles.layout}>
       {/* Sidebar */}
       <aside className={styles.sidebar}>
-        <div className={`${styles.brand} gradient-text-accent`}>
-          AI Commerce Copilot
+        <div className={styles.brand} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60px', marginBottom: '24px' }}>
+          <Image 
+            src="/logo.png" 
+            alt="SYNCHRO.VN Logo" 
+            width={180} 
+            height={60} 
+            style={{ objectFit: 'contain' }} 
+            priority
+          />
         </div>
         <nav className={styles.nav}>
           {navItems.map((item) => {
