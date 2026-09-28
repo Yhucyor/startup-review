@@ -65,10 +65,10 @@ export default function Particles() {
         if (!ctx) return;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(16, 185, 129, 0.8)";
+        ctx.fillStyle = "rgba(14, 165, 233, 0.8)";
         ctx.fill();
         ctx.shadowBlur = 10;
-        ctx.shadowColor = "#10b981";
+        ctx.shadowColor = "#0ea5e9";
       }
     }
 
@@ -97,7 +97,7 @@ export default function Particles() {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = `rgba(5, 150, 105, ${1 - distMouse / 180})`; // Dark green connection to mouse
+          ctx.strokeStyle = `rgba(2, 132, 199, ${1 - distMouse / 180})`; // Dark blue connection to mouse
           ctx.lineWidth = 1.5;
           ctx.stroke();
         }
@@ -112,7 +112,7 @@ export default function Particles() {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(16, 185, 129, ${0.3 - dist / 400})`; // Green connections between stars
+            ctx.strokeStyle = `rgba(14, 165, 233, ${0.3 - dist / 400})`; // Blue connections between stars
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }

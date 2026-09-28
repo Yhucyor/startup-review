@@ -2,7 +2,7 @@
 
 :root {
   /* Core Colors */
-  --bg-primary: #f0fdf4; /* Light green-white */
+  --bg-primary: #f0f9ff; /* Light sky-white */
   --bg-secondary: #ffffff; /* Pure white */
   --bg-tertiary: #e2e8f0; /* Slate 200 */
   --bg-glass: rgba(255, 255, 255, 0.7);
@@ -11,9 +11,9 @@
   --text-secondary: #475569; /* Slate 600 */
   --text-muted: #94a3b8; /* Slate 400 */
   
-  --accent-primary: #10b981; /* Emerald Green */
-  --accent-secondary: #059669; /* Dark Green */
-  --accent-glow: rgba(16, 185, 129, 0.4);
+  --accent-primary: #0ea5e9; /* Sky Blue */
+  --accent-secondary: #0284c7; /* Dark Sky Blue */
+  --accent-glow: rgba(14, 165, 233, 0.4);
   
   --border-color: rgba(0, 0, 0, 0.08);
   --border-light: rgba(0, 0, 0, 0.15);
