@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
+import Particles from "./Particles";
 
 export default function AuthPage() {
   const router = useRouter();
@@ -38,6 +39,7 @@ export default function AuthPage() {
       
       {/* Left side: Futuristic Sci-Fi Intro */}
       <div className={styles.introSection}>
+        <Particles />
         <div className={styles.starsContainer}>
           <div className={styles.stars}></div>
           <div className={`${styles.stars} ${styles.stars2}`}></div>
