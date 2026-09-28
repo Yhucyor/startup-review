@@ -11,6 +11,7 @@ const navItems = [
   { label: "Sản phẩm", path: "/dashboard/products", icon: "📦" },
   { label: "Đơn hàng", path: "/dashboard/orders", icon: "🛒" },
   { label: "Tồn kho", path: "/dashboard/inventory", icon: "📋" },
+  { label: "Kết nối sàn", path: "/dashboard/integrations", icon: "🔗" },
   { label: "Cài đặt", path: "/dashboard/settings", icon: "⚙️" },
 ];
 
