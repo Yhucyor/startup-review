@@ -4,31 +4,27 @@ import React, { useState } from 'react';
 import styles from './page.module.css';
 
 const LOGOS = [
-  { name: "Shopee", color: "#f97316", icon: "🛍️" },
-  { name: "Lazada", color: "#ec4899", icon: "💙" },
-  { name: "TIKI", color: "#38bdf8", icon: "📦" },
-  { name: "Sendo", color: "#ef4444", icon: "🔴" },
-  { name: "TGDD", color: "#eab308", icon: "📱" },
-  { name: "FPT Shop", color: "#1f2937", icon: "💻" },
-  { name: "ĐM XANH", color: "#0284c7", icon: "❄️" },
-  { name: "Nguyễn Kim", color: "#dc2626", icon: "📺" },
+  { name: "Shopee", color: "#f97316", icon: "🛍️", pos: { x: -350, y: -200 } },
+  { name: "Lazada", color: "#ec4899", icon: "💙", pos: { x: 280, y: -250 } },
+  { name: "TIKI", color: "#38bdf8", icon: "📦", pos: { x: -400, y: 150 } },
+  { name: "Sendo", color: "#ef4444", icon: "🔴", pos: { x: 300, y: 220 } },
+  { name: "TGDD", color: "#eab308", icon: "📱", pos: { x: -180, y: -300 } },
+  { name: "FPT Shop", color: "#1f2937", icon: "💻", pos: { x: 150, y: 300 } },
+  { name: "ĐM XANH", color: "#0284c7", icon: "❄️", pos: { x: -280, y: 0 } },
+  { name: "Nguyễn Kim", color: "#dc2626", icon: "📺", pos: { x: 380, y: -50 } },
 ];
 
 export default function LogoOrbit() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const RADIUS = 230; // Radius of the orbit
 
-  // Calculate coordinates for a given index
+  // Get pre-defined scattered coordinates relative to center
   const getCoords = (index: number) => {
-    const angle = (index / LOGOS.length) * 2 * Math.PI - Math.PI / 2; // Start from top (-90deg)
-    return {
-      x: Math.cos(angle) * RADIUS,
-      y: Math.sin(angle) * RADIUS
-    };
+    return LOGOS[index].pos;
   };
 
   return (
-    <div className={styles.orbitContainer}>
+    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none', zIndex: 15 }}>
       {/* SVG for drawing connection lines */}
       <svg 
         style={{
@@ -40,7 +36,7 @@ export default function LogoOrbit() {
           zIndex: 0
         }}
       >
-        <g transform={`translate(${RADIUS}, ${RADIUS})`}>
+        <g style={{ transform: 'translate(160px, 160px)' }}>
           {hoveredIndex !== null && (
             <>
               {/* Line to previous neighbor */}
@@ -95,11 +91,17 @@ export default function LogoOrbit() {
         return (
           <div
             key={logo.name}
-            className={`${styles.platformNode}`}
+            className="animate-float"
             style={{
+              position: 'absolute',
               left: `calc(50% + ${coords.x}px - 35px)`, // 35px is half of 70px width
               top: `calc(50% + ${coords.y}px - 35px)`,
               zIndex: isHovered ? 20 : 10,
+              width: '70px',
+              height: '70px',
+              pointerEvents: 'auto',
+              cursor: 'pointer',
+              animationDelay: `${idx * 0.5}s`,
             }}
             onMouseEnter={() => setHoveredIndex(idx)}
             onMouseLeave={() => setHoveredIndex(null)}
