@@ -2,29 +2,29 @@
 
 :root {
   /* Core Colors */
-  --bg-primary: #0a0a0c;
-  --bg-secondary: #121217;
-  --bg-tertiary: rgba(25, 25, 32, 0.6);
-  --bg-glass: rgba(25, 25, 32, 0.4);
+  --bg-primary: #f0fdf4; /* Light green-white */
+  --bg-secondary: #ffffff; /* Pure white */
+  --bg-tertiary: #e2e8f0; /* Slate 200 */
+  --bg-glass: rgba(255, 255, 255, 0.7);
   
-  --text-primary: #ffffff;
-  --text-secondary: #9494a0;
-  --text-muted: #646470;
+  --text-primary: #0f172a; /* Slate 900 */
+  --text-secondary: #475569; /* Slate 600 */
+  --text-muted: #94a3b8; /* Slate 400 */
   
-  --accent-primary: #6366f1; /* Indigo */
-  --accent-secondary: #a855f7; /* Purple */
-  --accent-glow: rgba(99, 102, 241, 0.4);
+  --accent-primary: #10b981; /* Emerald Green */
+  --accent-secondary: #059669; /* Dark Green */
+  --accent-glow: rgba(16, 185, 129, 0.4);
   
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-light: rgba(255, 255, 255, 0.15);
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-light: rgba(0, 0, 0, 0.15);
   
   /* Status Colors */
   --success: #10b981;
-  --success-bg: rgba(16, 185, 129, 0.1);
+  --success-bg: rgba(16, 185, 129, 0.15);
   --warning: #f59e0b;
-  --warning-bg: rgba(245, 158, 11, 0.1);
+  --warning-bg: rgba(245, 158, 11, 0.15);
   --error: #ef4444;
-  --error-bg: rgba(239, 68, 68, 0.1);
+  --error-bg: rgba(239, 68, 68, 0.15);
   
   /* Typography */
   --font-body: 'Inter', sans-serif;
