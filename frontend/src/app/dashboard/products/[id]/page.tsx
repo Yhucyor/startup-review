@@ -2,11 +2,13 @@
 
 import styles from "./page.module.css";
 import Link from "next/link";
+import { use } from "react";
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
+export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const unwrappedParams = use(params);
   // Mock data for the UI
   const product = {
-    id: params.id,
+    id: unwrappedParams.id,
     sku: "TEA-OL-01",
     title: "Trà Ô Long Cao Cấp 500g",
     desc: "Trà Ô Long được hái tay từ những búp trà tươi ngon nhất, sấy lạnh giữ nguyên hương vị tự nhiên. Phù hợp làm quà biếu hoặc sử dụng hàng ngày.",
