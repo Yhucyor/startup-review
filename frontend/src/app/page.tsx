@@ -1,162 +1,92 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import styles from "./page.module.css";
 import Particles from "./Particles";
 import LogoOrbit from "./LogoOrbit";
 
-export default function AuthPage() {
-  const router = useRouter();
-  const [isLogin, setIsLogin] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-
-    if (!email || !email.includes("@")) {
-      setError("Vui lòng nhập một email hợp lệ.");
-      return;
-    }
-    if (!password || password.length < 6) {
-      setError("Mật khẩu phải có ít nhất 6 ký tự.");
-      return;
-    }
-
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      router.push("/dashboard");
-    }, 1500);
-  };
-
+export default function LandingPage() {
   return (
     <div className={styles.container}>
-      
-      {/* Full Screen Background Effects */}
+      {/* Space Background Elements */}
       <Particles />
       <div className={styles.starsContainer}>
         <div className={styles.stars}></div>
         <div className={`${styles.stars} ${styles.stars2}`}></div>
         <div className={`${styles.stars} ${styles.stars3}`}></div>
       </div>
-      <div className={styles.gridOverlay}></div>
-      <div className={styles.scanner}></div>
+      <div className={styles.nebulaOverlay}></div>
 
-      {/* Left side: Futuristic Sci-Fi Intro */}
-      <div className={styles.introSection}>
+      {/* Top Navigation */}
+      <nav className={styles.navbar}>
+        <div className={styles.navLeft}>
+          <div className={styles.logo}>
+            <span className={styles.logoIcon}>🚀</span> SYNCHRO.VN
+          </div>
+        </div>
+        <div className={styles.navCenter}>
+          <Link href="#" className={styles.navLink}>Trang chủ</Link>
+          <Link href="#" className={styles.navLink}>Giải pháp ⏷</Link>
+          <Link href="#" className={styles.navLink}>Bảng giá</Link>
+          <Link href="#" className={styles.navLink}>Tài liệu</Link>
+        </div>
+        <div className={styles.navRight}>
+          <button className={styles.searchBtn}>🔍</button>
+          <Link href="/dashboard" className={styles.loginBtn}>Đăng nhập</Link>
+          <Link href="/dashboard" className={styles.registerBtn}>Bắt đầu miễn phí</Link>
+        </div>
+      </nav>
+
+      {/* Main Content Split */}
+      <main className={styles.mainContent}>
         
-        {/* Holographic AI Core Effect */}
-        <div className={styles.aiCore}>
+        {/* Left Side: Text and CTA */}
+        <div className={styles.leftSection}>
+          <div className={styles.pillTag}>
+            THẾ HỆ THƯƠNG MẠI ĐIỆN TỬ 4.0
+          </div>
           
-          {/* Orbiting Platforms */}
-          <LogoOrbit />
-
-          <div className={`${styles.ring} ${styles.ring3}`}></div>
-          <div className={`${styles.ring} ${styles.ring2}`}></div>
-          <div className={`${styles.ring} ${styles.ring1}`}></div>
-          <div className={styles.orb}></div>
-        </div>
-
-        <div className={styles.introContent}>
-          <h1 className={styles.introTitle}>AI NATIVE<br/>COPILOT</h1>
-          <p className={styles.introDesc}>
-            Kích hoạt hệ thống mạng nơ-ron nhân tạo. Tự động hóa quy trình quản lý, tối ưu hoá danh mục và điều phối kinh doanh đa nền tảng với tốc độ tương lai.
+          <h1 className={styles.heroTitle}>
+            Kết Nối Toàn Cầu,<br/>
+            <span className={styles.heroTitleGradient}>Vươn Tầm Vũ Trụ</span>
+          </h1>
+          
+          <p className={styles.heroDesc}>
+            Giải pháp tích hợp đa nền tảng tối ưu cho doanh nghiệp. SYNCHRO.VN kết nối Shopee, Lazada, Tiki và TikTok Shop vào một hệ sinh thái duy nhất, giúp bạn quản lý dòng chảy dữ liệu quy mô toàn cầu.
           </p>
-        </div>
-      </div>
 
-      {/* Right side: Cyberpunk style Auth Form */}
-      <div className={styles.authSection}>
-        <div className={`animate-fade-in ${styles.loginCard}`}>
-          
-          <div className={styles.header}>
-            <div className={styles.logo}>
-              HỆ THỐNG VẬN HÀNH
-            </div>
-            <p className={styles.subtitle}>
-              Xác thực truy cập không gian làm việc
-            </p>
-          </div>
-
-          <div className={styles.tabs}>
-            <button 
-              className={`${styles.tab} ${isLogin ? styles.active : ""}`}
-              onClick={() => { setIsLogin(true); setError(""); }}
-              type="button"
-            >
-              Đăng nhập
-            </button>
-            <button 
-              className={`${styles.tab} ${!isLogin ? styles.active : ""}`}
-              onClick={() => { setIsLogin(false); setError(""); }}
-              type="button"
-            >
-              Đăng ký
+          <div className={styles.buttonGroup}>
+            <Link href="/dashboard" className={styles.primaryBtn}>
+              Bắt đầu ngay <span className={styles.arrow}>→</span>
+            </Link>
+            <button className={styles.secondaryBtn}>
+              Xem demo kỹ thuật
             </button>
           </div>
 
-          {error && (
-            <div className={styles.errorBox}>
-              {error}
+          <div className={styles.statsRow}>
+            <div className={styles.statItem}>
+              <h3 className={styles.statNumber}>500+</h3>
+              <p className={styles.statLabel}>Đối tác lớn</p>
             </div>
-          )}
-
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <div className="input-group">
-              <label className="input-label" htmlFor="email" style={{color: 'rgba(255,255,255,0.7)'}}>MÃ ĐỊNH DANH (EMAIL)</label>
-              <input 
-                id="email"
-                type="email" 
-                className={`input-field ${styles.passwordInput}`}
-                placeholder="system@corp.com" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+            <div className={styles.statItem}>
+              <h3 className={styles.statNumber}>99.9%</h3>
+              <p className={styles.statLabel}>Thời gian hoạt động</p>
             </div>
-
-            <div className="input-group">
-              <label className="input-label" htmlFor="password" style={{color: 'rgba(255,255,255,0.7)'}}>MÃ BẢO MẬT</label>
-              <div className={styles.passwordWrapper}>
-                <input 
-                  id="password"
-                  type={showPassword ? "text" : "password"} 
-                  className={`input-field ${styles.passwordInput}`}
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <button 
-                  type="button" 
-                  className={styles.toggleBtn}
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? "ẨN" : "HIỆN"}
-                </button>
-              </div>
-            </div>
-
-            <button 
-              type="submit" 
-              className={styles.submitBtn}
-              disabled={loading}
-              style={{ color: 'white', borderRadius: '8px', border: 'none', cursor: loading ? 'not-allowed' : 'pointer' }}
-            >
-              {loading ? (
-                <span>ĐANG XÁC THỰC...</span>
-              ) : (
-                <span>{isLogin ? "BẮT ĐẦU KẾT NỐI" : "KHỞI TẠO TÀI KHOẢN"}</span>
-              )}
-            </button>
-          </form>
-
+          </div>
         </div>
-      </div>
+
+        {/* Right Side: Orbital Graphic */}
+        <div className={styles.rightSection}>
+          <div className={styles.aiCore}>
+            <LogoOrbit />
+            <div className={`${styles.ring} ${styles.ring3}`}></div>
+            <div className={`${styles.ring} ${styles.ring2}`}></div>
+            <div className={`${styles.ring} ${styles.ring1}`}></div>
+            <div className={styles.orb}></div>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
