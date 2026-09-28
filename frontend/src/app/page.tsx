@@ -43,6 +43,38 @@ export default function AuthPage() {
         
         {/* Holographic AI Core Effect */}
         <div className={styles.aiCore}>
+          
+          {/* Orbiting Platforms */}
+          <div className={styles.orbitContainer}>
+            <div className={`${styles.platformNode} ${styles.nodeShopee}`}>
+              <div className={styles.platformInner}>
+                <span style={{ fontSize: '24px' }}>🛍️</span>
+                <span style={{ fontSize: '9px' }}>Shopee</span>
+              </div>
+            </div>
+            
+            <div className={`${styles.platformNode} ${styles.nodeTiktok}`}>
+              <div className={styles.platformInner}>
+                <span style={{ fontSize: '24px', filter: 'drop-shadow(2px 2px 0px #ff0050)' }}>🎵</span>
+                <span style={{ fontSize: '9px' }}>TikTok</span>
+              </div>
+            </div>
+            
+            <div className={`${styles.platformNode} ${styles.nodeLazada}`}>
+              <div className={styles.platformInner}>
+                <span style={{ fontSize: '24px' }}>💙</span>
+                <span style={{ fontSize: '9px' }}>Lazada</span>
+              </div>
+            </div>
+            
+            <div className={`${styles.platformNode} ${styles.nodeFb}`}>
+              <div className={styles.platformInner}>
+                <span style={{ fontSize: '24px' }}>🌐</span>
+                <span style={{ fontSize: '9px' }}>Facebook</span>
+              </div>
+            </div>
+          </div>
+
           <div className={`${styles.ring} ${styles.ring3}`}></div>
           <div className={`${styles.ring} ${styles.ring2}`}></div>
           <div className={`${styles.ring} ${styles.ring1}`}></div>
