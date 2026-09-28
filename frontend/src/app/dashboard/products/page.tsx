@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./page.module.css";
+import Link from "next/link";
 
 const MOCK_PRODUCTS = [
   { id: 1, name: "Cà phê Rang Xay Nguyên Chất 250g", sku: "CF-250G", price: "85.000 ₫", stock: 120, status: "Đang bán", posts: 1 },
@@ -64,9 +65,9 @@ export default function ProductsPage() {
                 </td>
                 <td className={styles.td}>{prod.posts} (Shopee)</td>
                 <td className={styles.td}>
-                  <button className="btn btn-secondary" style={{ padding: '6px 12px', fontSize: '12px' }}>
-                    Sửa
-                  </button>
+                  <Link href={`/dashboard/products/${prod.id}`} className="btn btn-secondary" style={{ padding: '6px 12px', fontSize: '12px', textDecoration: 'none' }}>
+                    Chi tiết
+                  </Link>
                 </td>
               </tr>
             ))}
