@@ -36,12 +36,32 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.statCard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 4px; height: 100%;
+  background: #0ea5e9;
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+  transform-origin: bottom;
 }
 
 .statCard:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 16px 32px rgba(14, 165, 233, 0.08);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.statCard:hover::before {
+  transform: scaleY(1);
 }
 
 .statHeader {
@@ -93,16 +113,18 @@
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  padding: 16px;
-  background: var(--bg-secondary);
+  padding: 20px;
+  background: var(--bg-primary);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  transition: all 0.2s;
+  border-radius: var(--radius-lg);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
 }
 
 .taskItem:hover {
-  border-color: var(--border-light);
-  background: var(--bg-tertiary);
+  border-color: rgba(14, 165, 233, 0.3);
+  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.06);
+  transform: translateX(4px);
 }
 
 .taskIcon {
