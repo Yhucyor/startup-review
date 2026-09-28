@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1060" role="img" aria-labelledby="system-title system-desc">
+<title id="system-title">Hệ thống trợ lý bán hàng nhiều tác nhân AI</title>
+<desc id="system-desc">Người bán dùng app, bộ điều phối giao việc cho sáu trợ lý AI, kết quả qua kiểm tra và phê duyệt trước khi máy chủ gửi Shopee; đơn từ Shopee được xử lý bằng quy tắc cố định và lưu trong dữ liệu riêng của doanh nghiệp.</desc>
+<defs>
+<marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#454545"/></marker>
+<marker id="arrow-accent" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#c45b08"/></marker>
+<marker id="arrow-link" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#2563eb"/></marker>
+<style>
+:root{--paper:#fafaf7;--ink:#111111;--blue:#2563eb;--purple:#7c3aed;--orange:#c45b08;--green:#15803d;--pink:#be185d}
+text{fill:#111;font-family:Arial,"DejaVu Sans",sans-serif}
+.name{font-size:23px;font-weight:700}
+.body{font-size:18px}
+.small{font-size:16px}
+.tag{font-size:13px;font-weight:700;letter-spacing:.7px}
+.edge{fill:none;stroke:#454545;stroke-width:2;marker-end:url(#arrow)}
+.box{stroke-width:1.5;rx:8}
+.label{font-size:15px;font-weight:600}
+.tech-edge{fill:none;stroke:#454545;stroke-width:2;marker-end:url(#arrow)}
+.tech-name{font-size:22px;font-weight:700}
+.tech-body{font-size:16px}
+.tech-label{font-size:14px;font-weight:600}
+</style>
+</defs>
+<rect width="1280" height="1060" fill="#fafaf7"/>
+<!-- Connectors precede boxes; separate ports distinguish requests and responses. -->
+<path class="edge" d="M328 148H408"/>
+<path class="edge" d="M768 148H848"/>
+<path class="edge" d="M1044 412V420Q1044 428 1036 428H708Q700 428 700 436V456"/>
+<path class="edge" d="M408 540H328"/>
+<path class="edge" d="M328 644H408"/>
+<path class="edge" d="M768 576H848"/>
+<path class="edge" d="M1044 704V792"/>
+<path class="edge" d="M1180 792V704" stroke-dasharray="6 5"/>
+<path class="edge" d="M848 872H768"/>
+<path class="edge" d="M408 872H328"/>
+<!-- Arrow labels have opaque masks and visible space above the stroke. -->
+<rect x="330" y="504" width="76" height="26" fill="#fafaf7"/><text class="label" x="368" y="523" text-anchor="middle">Cần duyệt</text>
+<rect x="330" y="608" width="76" height="26" fill="#fafaf7"/><text class="label" x="368" y="627" text-anchor="middle">Đã duyệt</text>
+<rect x="1060" y="732" width="92" height="28" fill="#fafaf7"/><text class="label" x="1068" y="752">Gửi lên sàn</text>
+<rect x="1192" y="732" width="76" height="28" fill="#fafaf7"/><text class="label" x="1200" y="752">Kết quả</text>
+<rect x="772" y="836" width="72" height="26" fill="#fafaf7"/><text class="label" x="808" y="855" text-anchor="middle">Đơn mới</text>
+<rect x="340" y="836" width="56" height="26" fill="#fafaf7"/><text class="label" x="368" y="855" text-anchor="middle">Lưu lại</text>
+
+<g><rect class="box" x="40" y="60" width="288" height="184" fill="#eaf2ff" stroke="#2563eb"/>
+<text class="tag" x="64" y="88">01 · BẠN DÙNG APP</text><text class="name" x="64" y="124">Người bán</text>
+<text class="body" x="64" y="160">Nhập sản phẩm, giá, tồn kho</text><text class="body" x="64" y="188">Xem đơn và việc cần làm</text><text class="body" x="64" y="216">Hỏi trợ lý bằng tiếng Việt</text></g>
+
+<g><rect class="box" x="408" y="60" width="360" height="184" fill="#f1eaff" stroke="#7c3aed"/>
+<text class="tag" x="432" y="88">02 · PHÂN CÔNG</text><text class="name" x="432" y="124">Bộ điều phối công việc</text>
+<text class="body" x="432" y="160">Nhận yêu cầu, sản phẩm mới, lỗi</text><text class="body" x="432" y="188">Chọn trợ lý cần thiết và giao việc</text><text class="body" x="432" y="216">Lưu tiến độ, gom kết quả</text></g>
+
+<g><rect class="box" x="848" y="60" width="392" height="352" fill="#f1eaff" stroke="#7c3aed"/>
+<text class="tag" x="872" y="88">03 · CHUẨN BỊ ĐỀ XUẤT</text><text class="name" x="872" y="124">Đội trợ lý AI</text>
+<text class="body" x="872" y="164">Nội dung · Viết tiêu đề, mô tả</text><text class="body" x="872" y="200">Ngôn ngữ · Viết cho nơi bán</text><text class="body" x="872" y="236">Từ khóa · Gợi ý cụm từ liên quan</text><text class="body" x="872" y="272">Kiểm tra · Tìm thông tin thiếu nguồn</text><text class="body" x="872" y="308">Xử lý lỗi · Đề xuất cách khắc phục</text><text class="body" x="872" y="344">Trợ lý công việc · Trả lời, nhắc việc</text>
+<text class="small" x="872" y="384" font-weight="700">Mỗi trợ lý làm một việc, chỉ chạy khi cần.</text></g>
+
+<g><rect class="box" x="40" y="456" width="288" height="248" fill="#fff2d8" stroke="#c45b08"/>
+<text class="tag" x="64" y="484">BẠN GIỮ QUYỀN QUYẾT ĐỊNH</text><text class="name" x="64" y="520">Việc cần duyệt</text>
+<text class="body" x="64" y="560">Xem nội dung sẽ thay đổi</text><text class="body" x="64" y="588">Sửa hoặc bổ sung thông tin</text><text class="body" x="64" y="616">Duyệt hoặc từ chối đề xuất</text>
+<text class="small" x="64" y="656" font-weight="700">Mặc định: chờ người có quyền</text><text class="small" x="64" y="680" font-weight="700">phê duyệt trước khi đăng.</text></g>
+
+<g><rect class="box" x="408" y="456" width="360" height="248" fill="#fff2d8" stroke="#c45b08"/>
+<text class="tag" x="432" y="484">04 · KIỂM TRA TRƯỚC KHI LÀM</text><text class="name" x="432" y="520">Cổng kiểm tra của app</text>
+<text class="body" x="432" y="560">Đúng quyền và đúng doanh nghiệp?</text><text class="body" x="432" y="588">Đủ thông tin, đúng bản đã duyệt?</text><text class="body" x="432" y="616">Còn trong giới hạn được cho phép?</text>
+<text class="small" x="432" y="652" font-weight="700">Chỉ cho qua khi đã duyệt, hoặc</text><text class="small" x="432" y="676" font-weight="700">đủ điều kiện tự động đã được bật.</text></g>
+
+<g><rect class="box" x="848" y="456" width="392" height="248" fill="#e8f6eb" stroke="#15803d"/>
+<text class="tag" x="872" y="484">05 · MÁY CHỦ THỰC HIỆN</text><text class="name" x="872" y="520">Đăng và đồng bộ</text>
+<text class="body" x="872" y="560">Kiểm tra lại ngay trước lúc gửi</text><text class="body" x="872" y="588">Đăng bài, cập nhật giá và tồn kho</text><text class="body" x="872" y="616">Thử lại lỗi tạm thời, tránh gửi trùng</text>
+<text class="small" x="872" y="652" font-weight="700">AI không được trực tiếp gọi sàn.</text><text class="small" x="872" y="676">Lỗi cần quyết định → đưa về việc cần duyệt.</text></g>
+
+<g><rect class="box" x="848" y="792" width="392" height="168" fill="#fff0e8" stroke="#dc5c24"/>
+<text class="tag" x="872" y="820">06 · SÀN BÁN HÀNG</text><text class="name" x="872" y="856">Shopee</text>
+<text class="body" x="872" y="892">Khách mua hàng tại đây</text><text class="body" x="872" y="920">Trả kết quả đăng, đơn và trạng thái</text><text class="small" x="872" y="944">Chỉ báo thành công khi sàn xác nhận.</text></g>
+
+<g><rect class="box" x="408" y="792" width="360" height="168" fill="#e8f6eb" stroke="#15803d"/>
+<text class="tag" x="432" y="820">07 · APP XỬ LÝ ĐƠN</text><text class="name" x="432" y="856">Nhận đơn và cập nhật tồn</text>
+<text class="body" x="432" y="892">Ghép mã hàng, trừ tồn đúng một lần</text><text class="body" x="432" y="920">Giao việc đồng bộ số lượng lên sàn</text><text class="small" x="432" y="944">Theo quy tắc cố định; AI không tính tồn.</text></g>
+
+<g><rect class="box" x="40" y="792" width="288" height="168" fill="#fdebf3" stroke="#be185d"/>
+<text class="tag" x="64" y="820">DỮ LIỆU DÙNG XUYÊN SUỐT</text><text class="name" x="64" y="856">Bộ nhớ của app</text>
+<text class="body" x="64" y="892">Sản phẩm, đơn, giá và tồn</text><text class="body" x="64" y="920">Công việc, bản duyệt, lịch sử</text><text class="small" x="64" y="944">Mỗi doanh nghiệp có dữ liệu riêng.</text></g>
+
+<path d="M40 996H1240" stroke="#c7c7c7"/>
+<circle cx="48" cy="1024" r="6" fill="#2563eb"/><text class="small" x="64" y="1030">Người bán</text>
+<circle cx="232" cy="1024" r="6" fill="#7c3aed"/><text class="small" x="248" y="1030">AI hỗ trợ</text>
+<circle cx="424" cy="1024" r="6" fill="#c45b08"/><text class="small" x="440" y="1030">Kiểm tra, duyệt</text>
+<circle cx="656" cy="1024" r="6" fill="#15803d"/><text class="small" x="672" y="1030">App thực hiện</text>
+<circle cx="872" cy="1024" r="6" fill="#be185d"/><text class="small" x="888" y="1030">Dữ liệu</text>
+<path class="edge" d="M1040 1024H1080" stroke-dasharray="6 5"/><text class="small" x="1096" y="1030">Phản hồi</text>
+</svg>
