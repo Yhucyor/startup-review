@@ -136,7 +136,7 @@ export default function AuthPage() {
 
           <form className={styles.form} onSubmit={handleSubmit}>
             <div className="input-group">
-              <label className="input-label" htmlFor="email" style={{color: 'var(--text-secondary)'}}>MÃ ĐỊNH DANH (EMAIL)</label>
+              <label className="input-label" htmlFor="email" style={{color: 'rgba(255,255,255,0.7)'}}>MÃ ĐỊNH DANH (EMAIL)</label>
               <input 
                 id="email"
                 type="email" 
@@ -148,7 +148,7 @@ export default function AuthPage() {
             </div>
 
             <div className="input-group">
-              <label className="input-label" htmlFor="password" style={{color: 'var(--text-secondary)'}}>MÃ BẢO MẬT</label>
+              <label className="input-label" htmlFor="password" style={{color: 'rgba(255,255,255,0.7)'}}>MÃ BẢO MẬT</label>
               <div className={styles.passwordWrapper}>
                 <input 
                   id="password"
