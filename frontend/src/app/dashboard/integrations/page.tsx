@@ -7,6 +7,7 @@ export default function IntegrationsPage() {
   const [inputValue, setInputValue] = useState("");
   const [isScanning, setIsScanning] = useState(false);
   const [scanLogs, setScanLogs] = useState<string[]>([]);
+  const [selectedPlatform, setSelectedPlatform] = useState<any>(null);
   
   const [platforms, setPlatforms] = useState([
     {
@@ -155,13 +156,81 @@ export default function IntegrationsPage() {
             </div>
 
             <div className={styles.cardActions}>
-              <button className={styles.btnConfigure}>
-                {platform.status === 'connected' ? 'Cấu hình gian hàng' : 'Kết nối thủ công'}
+              <button 
+                className={styles.btnConfigure}
+                onClick={() => setSelectedPlatform(platform)}
+              >
+                {platform.status === 'connected' ? 'Cấu hình gian hàng' : 'Chi tiết kết nối'}
               </button>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Side Panel Drawer */}
+      {selectedPlatform && (
+        <div className={styles.drawerOverlay} onClick={() => setSelectedPlatform(null)}>
+          <div className={styles.drawer} onClick={e => e.stopPropagation()}>
+            <div className={styles.drawerHeader}>
+              <div className={styles.drawerTitle}>
+                {selectedPlatform.icon} Cấu hình {selectedPlatform.name}
+              </div>
+              <button className={styles.closeBtn} onClick={() => setSelectedPlatform(null)}>✕</button>
+            </div>
+            
+            <div className={styles.detailSection}>
+              <div className={styles.detailLabel}>Trạng thái hiện tại</div>
+              <div className={styles.detailValue} style={{ 
+                color: selectedPlatform.status === 'connected' ? '#10b981' : '#f59e0b',
+                display: 'flex', alignItems: 'center', gap: '8px'
+              }}>
+                <span style={{ 
+                  width: '10px', height: '10px', borderRadius: '50%', 
+                  background: selectedPlatform.status === 'connected' ? '#10b981' : '#f59e0b' 
+                }}></span>
+                {selectedPlatform.status === 'connected' ? 'Hoạt động bình thường' : 'Đang chờ kết nối'}
+              </div>
+            </div>
+
+            <div className={styles.detailSection}>
+              <div className={styles.detailLabel}>Thông tin cửa hàng</div>
+              <div className={styles.itemRow} style={{ borderBottom: 'none', padding: '4px 0' }}>
+                <span style={{ color: 'var(--text-secondary)' }}>Tên gian hàng:</span>
+                <strong>{selectedPlatform.shopName}</strong>
+              </div>
+              <div className={styles.itemRow} style={{ borderBottom: 'none', padding: '4px 0' }}>
+                <span style={{ color: 'var(--text-secondary)' }}>ID Cửa hàng:</span>
+                <strong>{selectedPlatform.status === 'connected' ? '893452142' : '---'}</strong>
+              </div>
+            </div>
+
+            <div className={styles.detailSection}>
+              <div className={styles.detailLabel}>Tùy chọn đồng bộ</div>
+              <div style={{ background: 'var(--bg-secondary)', borderRadius: '8px', border: '1px solid var(--border-color)', padding: '16px' }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', cursor: 'pointer' }}>
+                  <input type="checkbox" defaultChecked />
+                  <span style={{ fontSize: '14px', fontWeight: 500 }}>Tự động đồng bộ Tồn kho (Auto-sync)</span>
+                </label>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', cursor: 'pointer' }}>
+                  <input type="checkbox" defaultChecked />
+                  <span style={{ fontSize: '14px', fontWeight: 500 }}>Đồng bộ Đơn hàng theo thời gian thực</span>
+                </label>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }}>
+                  <input type="checkbox" defaultChecked={false} />
+                  <span style={{ fontSize: '14px', fontWeight: 500 }}>Gửi tin nhắn tự động chăm sóc KH</span>
+                </label>
+              </div>
+            </div>
+            
+            <div style={{ marginTop: 'auto', display: 'flex', gap: '12px' }}>
+              <button className="btn btn-secondary" style={{ flex: 1 }} onClick={() => setSelectedPlatform(null)}>Đóng</button>
+              <button className="btn btn-primary" style={{ flex: 1 }}>
+                {selectedPlatform.status === 'connected' ? 'Cập nhật cấu hình' : 'Bắt đầu kết nối'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
