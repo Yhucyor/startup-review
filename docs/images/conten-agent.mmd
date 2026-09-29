@@ -1,0 +1,30 @@
+flowchart TD
+    A[Model Output: Raw Candidates / Chiến lược khác nhau] --> B[1. LỚP RERANKING]
+    C[Manual Draft & Locked Fields của Seller] --> B
+    
+    subgraph B [src/ai/agents/content/reranker.ts]
+        B1[Chấm điểm Fact Grounding - 40%]
+        B2[Chấm điểm Policy & Compliance - 30%]
+        B3[Chấm điểm SEO Readiness - 15%]
+        B4[Chấm điểm Readability & Bố cục - 15%]
+        B5[Reciprocal Rank Fusion - RRF k=60]
+        B1 --> B5
+        B2 --> B5
+        B3 --> B5
+        B4 --> B5
+    end
+    
+    B --> D[2. LỚP FUSION]
+    
+    subgraph D [src/ai/agents/content/fusion.ts]
+        D1[Ưu tiên bảo vệ lockedFields từ người bán]
+        D2[Fact Fusion: Hợp nhất claims có kiểm chứng từ các candidates điểm cao]
+        D3[Highlight Fusion: Khử trùng lặp và chọn điểm nhấn mạnh nhất]
+        D4[Gộp cảnh báo compliance và missingFacts]
+        D1 --> D5[Final Grounded & Fused Output]
+        D2 --> D5
+        D3 --> D5
+        D4 --> D5
+    end
+    
+    D --> E[Output hoàn chỉnh gắn kèm selectionMetadata & candidates rank]
