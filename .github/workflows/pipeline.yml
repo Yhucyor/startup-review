@@ -1,0 +1,84 @@
+name: CI/CD Master Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+    tags: [ 'v*.*.*' ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+    inputs:
+      deploy_strategy:
+        description: 'Production Deployment Strategy'
+        required: true
+        default: 'canary'
+        type: choice
+        options:
+          - canary
+          - blue-green
+          - direct
+
+permissions:
+  contents: read
+  packages: write
+  security-events: write
+  pull-requests: write
+  actions: read
+  id-token: write
+
+jobs:
+  # -------------------------------------------------------------------------
+  # 1. Code Quality & Security Scan (Lint, Secret scan, SAST)
+  # -------------------------------------------------------------------------
+  stage-1-quality-security:
+    uses: ./.github/workflows/code-quality-security.yml
+    secrets: inherit
+
+  # -------------------------------------------------------------------------
+  # 2. Unit & Integration Tests (Testcontainers, Coverage check)
+  # -------------------------------------------------------------------------
+  stage-2-tests:
+    needs: [stage-1-quality-security]
+    uses: ./.github/workflows/unit-integration-tests.yml
+    secrets: inherit
+
+  # -------------------------------------------------------------------------
+  # 3. Dependency & CVE Scan (SCA, npm audit, Trivy)
+  # -------------------------------------------------------------------------
+  stage-3-dependency-scan:
+    needs: [stage-1-quality-security]
+    uses: ./.github/workflows/dependency-cve-scan.yml
+    secrets: inherit
+
+  # -------------------------------------------------------------------------
+  # 4. Production Build & Docker Image Packaging
+  # -------------------------------------------------------------------------
+  stage-4-build-package:
+    needs: [stage-2-tests, stage-3-dependency-scan]
+    uses: ./.github/workflows/docker-build-package.yml
+    with:
+      push_image: ${{ github.event_name != 'pull_request' }}
+    secrets: inherit
+
+  # -------------------------------------------------------------------------
+  # 5. Deploy to Staging + E2E / Smoke Test + DB Migration Test
+  # -------------------------------------------------------------------------
+  stage-5-deploy-staging:
+    needs: [stage-4-build-package]
+    if: (github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch') && github.event_name != 'pull_request'
+    uses: ./.github/workflows/deploy-staging.yml
+    with:
+      image_uri: ${{ needs.stage-4-build-package.outputs.image_uri }}
+    secrets: inherit
+
+  # -------------------------------------------------------------------------
+  # 6. Manual Approval / Tag Release -> Deploy Prod (Canary / Blue-Green)
+  # -------------------------------------------------------------------------
+  stage-6-deploy-production:
+    needs: [stage-5-deploy-staging]
+    if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/deploy-production.yml
+    with:
+      image_uri: ${{ needs.stage-4-build-package.outputs.image_uri }}
+      deploy_strategy: ${{ inputs.deploy_strategy || 'canary' }}
+    secrets: inherit
