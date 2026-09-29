@@ -24,7 +24,7 @@ Giúp một doanh nghiệp quản lý sản phẩm gốc tại một nơi, trong
 
 **Kết quả của phiên bản đầu:** người dùng mới có thể tạo doanh nghiệp → kết nối một cửa hàng Shopee → tạo hoặc nhập sản phẩm → app tự lập công việc AI và bản nháp → kiểm tra quy tắc → đưa vào hộp việc cần duyệt hoặc tự đăng theo quy tắc đã bật → nhận đơn → tự đối chiếu SKU, trừ tồn, đồng bộ lại → app tự phát hiện và đề xuất xử lý lỗi. Có thể chạy toàn bộ hành trình trong Chế độ dùng thử khi chưa có quyền kết nối thật, nhưng phải phân biệt rõ.
 
-Không xây chợ bán hàng cho người mua, không tự vận hành logistics, không xây công cụ tư vấn pháp lý xuất khẩu. Ý tưởng trong tài liệu “AI Market Entry Copilot for Vietnamese SMEs” về chấm điểm quốc gia, kiểm tra quy định nhập khẩu và kế hoạch vào thị trường được giữ làm định hướng mở rộng, **không phải lời hứa của bản đầu**.
+Không xây chợ bán hàng cho người mua, không tự vận hành logistics. Tuy nhiên, hệ thống tích hợp sẵn các tính năng nâng cao (dựa trên ý tưởng “AI Market Entry Copilot for Vietnamese SMEs”): đánh giá và chấm điểm thị trường/quốc gia, kiểm tra lỗi quy định pháp lý (dựa trên bộ dữ liệu luật do người dùng tự xây dựng), lập kế hoạch thâm nhập thị trường, học từ đánh giá của khách hàng (Market Knowledge Base), và mô phỏng khách hàng để A/B test (tính năng nâng cao).
 
 ### Sơ đồ 1: Luồng hoạt động tổng quan (Người bán — Đội AI — Shopee)
 
@@ -61,6 +61,10 @@ Giao diện luôn cho biết **đang làm việc trong doanh nghiệp nào**. Kh
 | Cập nhật tồn kho, giá | Thay đổi số lượng/giá trong app và thấy kết quả đồng bộ đến bài đăng |
 | Dashboard và cảnh báo | Thấy đơn mới, hàng sắp hết, bài đăng lỗi, kết nối lỗi |
 | Lịch sử thao tác | Biết ai đã sửa, duyệt, đăng hoặc xử lý một vấn đề |
+| Tổng hợp nhóm đơn hàng | Hiển thị đơn hàng gom theo nền tảng, nhóm sản phẩm để tránh quá tải thông báo |
+| Kiểm tra quy định và Pháp lý | Đối chiếu tự động sản phẩm với quy định xuất/nhập khẩu từ bộ dữ liệu luật người dùng tự tạo |
+| Đánh giá và Chấm điểm thị trường | Gợi ý quốc gia bán tốt nhất qua biểu đồ, điểm số (ví dụ: Thái Lan 82/100) và phân tích lý do |
+| Kế hoạch và Mô phỏng thị trường | AI lập kế hoạch thâm nhập, đọc review để học hỏi, và giả lập tập khách hàng để A/B test |
 
 ### Sơ đồ 2: Cấu trúc các module nền tảng bán hàng đa sàn
 
@@ -91,8 +95,9 @@ Giao diện luôn cho biết **đang làm việc trong doanh nghiệp nào**. Kh
 | M15 | Việc cần duyệt | Khi app cần người bán xác nhận đề xuất hoặc xử lý ngoại lệ |
 | M16 | Trợ lý AI và dòng hoạt động | Khi hỏi tình trạng công việc, yêu cầu app chuẩn bị việc mới, xem đã làm gì |
 | M17 | Quy tắc tự động hóa | Khi chủ doanh nghiệp chọn quyền tự động của app |
+| M18 | Đánh giá và Chấm điểm thị trường | Khi xem gợi ý quốc gia phù hợp, kế hoạch thâm nhập thị trường và mô phỏng A/B test |
 
-Không cần trang “Thị trường”, “Kiểm tra xuất khẩu”, “Vận chuyển”, “Kho hàng” hoặc trang bán trực tiếp cho người mua trong bản đầu.
+Không cần trang “Vận chuyển”, “Kho hàng” hoặc trang bán trực tiếp cho người mua trong bản đầu.
 
 ## (5) Thành phần trên từng màn hình
 
@@ -108,13 +113,14 @@ Không cần trang “Thị trường”, “Kiểm tra xuất khẩu”, “V�
 | **M08** | Tóm tắt sản phẩm gốc; chọn cửa hàng/ngôn ngữ; ô ghi chú cho AI (không bắt buộc); nút Tạo gợi ý; trạng thái Đang tạo; tiêu đề/mô tả/từ khóa do AI đề xuất; cột đối chiếu thông tin gốc; nút Sửa, Tạo lại, Lưu nháp, Phê duyệt. Hiển thị người duyệt và thời điểm duyệt. |
 | **M09** | Danh sách bài đăng theo sản phẩm và cửa hàng; bộ lọc Bản nháp/Sẵn sàng/Đang đăng/Đã đăng/Lỗi/Bị từ chối; tìm kiếm; lý do lỗi ngắn; thời điểm cập nhật; nút mở chi tiết. |
 | **M10** | Nội dung sẽ đăng; danh mục/thuộc tính/ảnh; danh sách lỗi kiểm tra; lịch sử phiên bản và thao tác; trạng thái; mã và đường dẫn bên sàn nếu có; nút Kiểm tra, Phê duyệt, Đăng, Sửa, Thử lại theo đúng quyền và trạng thái. |
-| **M11** | Danh sách đơn gồm mã nội bộ, mã sàn, cửa hàng, thời gian, trạng thái, tổng tiền, tiền tệ; lọc/tìm kiếm; màn hình chi tiết gồm các mặt hàng, SKU tương ứng, số lượng, tiền, trạng thái đồng bộ. Chỉ hiển thị thông tin khách hàng thực sự cần và được sàn cung cấp. Có nút Xuất CSV cho người có quyền. |
+| **M11** | Chế độ xem tổng hợp (gom theo nền tảng, nhóm sản phẩm) giúp tránh tràn ngập thông báo khi bán số lượng lớn; và Danh sách đơn chi tiết (mã, thời gian, tiền, trạng thái). Màn hình chi tiết chứa các mặt hàng, SKU, số lượng, tình trạng đồng bộ. |
 | **M12** | Danh sách SKU/biến thể, số có thể bán, ngưỡng cảnh báo thấp, giá hiện tại, các bài đăng liên quan, trạng thái và thời gian đồng bộ; nút Điều chỉnh số lượng, Điều chỉnh giá, Xem lịch sử, Thử đồng bộ lại. |
 | **M13** | Danh sách thành viên, email, vai trò, trạng thái; nút Mời, Đổi vai trò, Thu hồi quyền; thông báo kết quả. Lời mời qua email chỉ dùng khi chức năng gửi email thực sự hoạt động; nếu chưa có, cung cấp liên kết mời một lần có hạn dùng và hiển thị rõ cách chia sẻ an toàn. |
 | **M14** | Tên doanh nghiệp; thông tin tài khoản; lựa chọn doanh nghiệp; nút Lưu thay đổi, Đăng xuất; phần lịch sử thao tác chỉ người có quyền xem. Không hiển thị mục Thanh toán/Billing hoạt động nếu chưa triển khai. |
 | **M15** | Thẻ việc với lý do app đề xuất, sản phẩm/cửa hàng liên quan, nội dung trước/sau, rủi ro, thời điểm tạo; lọc theo Việc cần duyệt/Lỗi/Cần bổ sung; nút Duyệt và thực hiện, Chỉnh sửa, Từ chối, Để sau. Không gộp nhiều thao tác có tác động khác nhau vào một nút duyệt mơ hồ. |
 | **M16** | Ô hỏi bằng tiếng Việt, các gợi ý như “Sản phẩm nào chưa đăng được?” và “Vì sao đơn này cần kiểm tra?”; câu trả lời trích từ dữ liệu của đúng doanh nghiệp, có liên kết mở bản ghi; dòng hoạt động gồm Ai/app đã làm gì, lúc nào, trạng thái, lý do, bước kế tiếp; nút Dừng/Thử lại cho công việc được phép. Lệnh bằng lời nói chưa cần. |
 | **M17** | Chế độ tự động cho từng cửa hàng; công tắc Tự tạo bản nháp, Tự kiểm tra, Tự đồng bộ đơn/tồn/giá, Tự đăng theo điều kiện; phạm vi sản phẩm áp dụng; giới hạn số bài đăng mỗi ngày; điều kiện chặn khi thiếu dữ liệu/có cảnh báo; nút Lưu quy tắc, Tạm dừng mọi thao tác đăng tự động; lịch sử thay đổi quy tắc. Mặc định Tự đăng tắt. |
+| **M18** | Hiển thị điểm số phù hợp của quốc gia (VD: Thái Lan 82/100) và nút phân tích mở ra biểu đồ cột; Kế hoạch vào thị trường do AI lập (Khách hàng mục tiêu, định vị, giá, thông điệp); Khu vực Mô phỏng giả lập nhóm khách hàng để A/B test; Góc hiển thị Market Knowledge Base từ học hỏi review. |
 
 Mọi bảng trên điện thoại chuyển thành danh sách thẻ dễ đọc, không buộc cuộn ngang toàn trang. Mọi tác vụ nền cần có trạng thái và thời gian cập nhật.
 
@@ -222,6 +228,7 @@ AI phục vụ **điều phối công việc hằng ngày**, chuẩn bị bài �
 | **Tác nhân xử lý ngoại lệ** | Đọc lỗi sàn và lịch sử liên quan, tóm tắt nguyên nhân, đề xuất bản sửa hoặc bước tiếp theo cho seller | Tự sửa và đăng lại khi cần phê duyệt |
 | **Tác nhân trợ lý công việc** | Trả lời câu hỏi về dữ liệu của đúng doanh nghiệp, ưu tiên việc tồn đọng và mở đúng màn hình | Nhận câu chat là sự cho phép vĩnh viễn để thực hiện thao tác |
 | **Bộ kiểm tra theo quy tắc bằng chương trình** | Kiểm tra kiểu dữ liệu, trường bắt buộc, độ dài, từ bị cấm đã biết, thiếu ảnh/thuộc tính | Thay thế kiểm duyệt của người và kết quả của sàn |
+| **Tác nhân Thị trường & Pháp lý** | Kiểm tra lỗi quy định/pháp lý dựa trên DB luật tự xây; đọc review lập Market Knowledge Base; mô phỏng nhóm khách hàng A/B test | Bịa ra luật xuất nhập khẩu hoặc quy định khi DB chưa có |
 
 **Luồng AI native:** sự kiện hoặc người dùng kích hoạt → app lưu công việc → bộ điều phối chọn tác nhân cần thiết → chạy song song phần độc lập → gom kết quả có cấu trúc → kiểm tra bằng chương trình → dựa trên quy tắc của doanh nghiệp để (1) mở việc cần bổ sung/duyệt hoặc (2) cho máy chủ thực hiện thao tác đã được ủy quyền trước → lưu lịch sử và theo dõi kết quả sàn. AI không có công cụ trực tiếp gửi yêu cầu đăng, đổi giá, trừ tồn hay thay đổi quyền; chỉ máy chủ nghiệp vụ thực hiện sau khi kiểm tra.
 
@@ -293,6 +300,7 @@ Không cho xóa hoặc hạ quyền của Chủ cuối cùng. Một người gi�
 | Tác nhân hoặc worker lỗi giữa quy trình, chạy lại sau khi máy chủ khởi động | Phục hồi trạng thái, thử lại có giới hạn; không gọi sàn hai lần vì một quyết định |
 | Người dùng chat câu mơ hồ như “đăng hết đi” | Hiện phạm vi và bản xem trước; chỉ thực hiện theo quyền/quy tắc đã bật hoặc sau xác nhận cụ thể |
 | Thiếu thuộc tính, ảnh không đạt, danh mục sai, sàn từ chối | Giữ bài đăng ở trạng thái lỗi; hiển thị lỗi cụ thể, trường cần sửa và hành động tiếp theo |
+| Sản phẩm vi phạm quy định pháp lý hoặc luật xuất/nhập khẩu | Phát hiện thông qua đối chiếu DB luật; báo lỗi "Quy định & Pháp lý", chặn tự động đăng, yêu cầu người bán sửa |
 | Sàn giới hạn số lần gọi hoặc tạm ngừng | Tự chờ/thử lại có giới hạn; hiển thị Đang chờ; không gửi dồn dập hoặc báo thành công giả |
 | Người dùng bấm Đăng/Thử lại nhiều lần | Chỉ có một công việc hiệu lực cho cùng yêu cầu; không tạo nhiều bài đăng ngoài ý muốn |
 | Sàn gửi một đơn nhiều lần hoặc đồng thời | Chỉ lưu một đơn, không trừ tồn nhiều lần |
@@ -350,8 +358,8 @@ Người xây app phải trình diễn và kiểm thử các tình huống sau; 
 - Quản lý kho vật lý, nhiều vị trí kho, đóng gói, hãng vận chuyển, vận đơn, theo dõi giao hàng, fulfillment.
 - Tự động xuất hàng, nộp hồ sơ hải quan, xác nhận sản phẩm hợp pháp ở nước ngoài.
 - AI tự đổi giá, tự thay đổi tồn kho theo suy đoán, tự trả lời khách hoặc tự quyết định hoàn tiền. **Tự đăng trong giới hạn quy tắc do Chủ/Quản trị bật là tính năng bản đầu**; máy chủ kiểm tra và thi hành, AI không trực tiếp gọi sàn.
-- Chấm điểm quốc gia phù hợp, kế hoạch thâm nhập thị trường, nghiên cứu đối thủ có nguồn, kiểm tra quy định xuất nhập khẩu và đề xuất giá động.
-- Tạo ảnh/video bằng AI, xóa nền ảnh, dự báo nhu cầu, AI chăm sóc khách hàng, ERP/PIM ngoài, tự động đăng blog/Google.
+- Nghiên cứu đối thủ chuyên sâu qua tự động cào dữ liệu thời gian thực, đề xuất và tự động đổi giá liên tục theo đối thủ.
+- Tạo ảnh/video bằng AI, xóa nền ảnh, dự báo nhu cầu, AI chăm sóc khách hàng tự động trả lời, ERP/PIM ngoài, tự động đăng blog/Google.
 - Báo cáo nâng cao về lượt xem, click, chuyển đổi khi chưa có nguồn dữ liệu thực; gói thuê bao và thanh toán tự động nếu chưa tích hợp cổng thanh toán.
 
 ## Đề xuất tổ chức kỹ thuật cho người xây app
