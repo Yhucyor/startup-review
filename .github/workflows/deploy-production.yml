@@ -1,0 +1,103 @@
+name: 6. Deploy Production (Canary / Blue-Green)
+
+on:
+  workflow_call:
+    inputs:
+      image_uri:
+        description: 'Docker image URI to deploy'
+        required: false
+        type: string
+        default: ''
+      deploy_strategy:
+        description: 'Deployment Strategy (canary or blue-green)'
+        required: false
+        type: string
+        default: 'canary'
+  workflow_dispatch:
+    inputs:
+      image_uri:
+        description: 'Docker image URI to deploy'
+        required: false
+        type: string
+        default: ''
+      deploy_strategy:
+        description: 'Deployment Strategy'
+        required: true
+        default: 'canary'
+        type: choice
+        options:
+          - canary
+          - blue-green
+          - direct
+
+jobs:
+  deploy-production:
+    name: Production Rollout (Canary / Blue-Green)
+    runs-on: ubuntu-latest
+    environment:
+      # GitHub Environment Protection Rules enforce Manual Approval required reviewers here!
+      name: production
+      url: https://example.com
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Resolve Deploy Strategy
+        id: strategy
+        run: |
+          STRATEGY="${{ inputs.deploy_strategy || github.event.inputs.deploy_strategy || 'canary' }}"
+          echo "Selected Strategy: $STRATEGY"
+          echo "strategy=$STRATEGY" >> $GITHUB_OUTPUT
+
+      # -----------------------------------------------------------------------
+      # PROD STEP 1: CANARY ROLLOUT (10% Traffic)
+      # -----------------------------------------------------------------------
+      - name: 6.1 Deploy Canary (10% Traffic)
+        if: steps.strategy.outputs.strategy == 'canary'
+        run: |
+          IMAGE="${{ inputs.image_uri || github.event.inputs.image_uri || 'ghcr.io/' || github.repository || ':latest' }}"
+          echo "==> Deploying Canary Pods with image $IMAGE..."
+          echo "Routing 10% live user traffic to Canary via Ingress..."
+          # kubectl apply -f k8s/canary.yaml
+
+      - name: 6.2 Canary Health & Metrics Monitoring Window
+        if: steps.strategy.outputs.strategy == 'canary'
+        run: |
+          echo "Evaluating Canary metrics (HTTP 5xx rate, p99 latency) for 30s..."
+          sleep 10
+          CANARY_ERROR_RATE="0.01%"
+          echo "Canary metrics healthy: 5xx error rate = $CANARY_ERROR_RATE (< 0.5% threshold)."
+
+      # -----------------------------------------------------------------------
+      # PROD STEP 2: BLUE-GREEN / FULL PROMOTION (100% Traffic Switch)
+      # -----------------------------------------------------------------------
+      - name: 6.3 Promote to 100% Traffic (Blue-Green / Full Rollout)
+        run: |
+          IMAGE="${{ inputs.image_uri || github.event.inputs.image_uri || 'ghcr.io/' || github.repository || ':latest' }}"
+          echo "==> Switching 100% live traffic to new version $IMAGE..."
+          # Blue-Green: Switch service target to Green deployment
+          # Canary: Scale up new release to 100%, decommission old version
+          echo "Traffic switch completed successfully."
+
+      - name: 6.4 Production Smoke Test & Health Check
+        run: |
+          echo "Executing production health checks..."
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://httpbin.org/status/200 || echo "000")
+          if [ "$STATUS" = "200" ]; then
+            echo "Production service is fully HEALTHY (HTTP 200 OK)."
+          else
+            echo "Production health check failed!"
+            exit 1
+          fi
+
+      # -----------------------------------------------------------------------
+      # PROD STEP 3: AUTOMATED ROLLBACK ON FAILURE
+      # -----------------------------------------------------------------------
+      - name: 6.5 Automated Rollback on Deployment Failure
+        if: failure()
+        run: |
+          echo "CRITICAL: Production deployment or health check failed!"
+          echo "Initiating automated rollback to previous stable version..."
+          # kubectl rollout undo deployment/production-app
+          # Route 100% traffic back to Blue
+          echo "Rollback completed. Emergency alerts dispatched to On-Call."

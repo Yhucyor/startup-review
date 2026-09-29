@@ -1,0 +1,12 @@
+Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+.next
+.git
+.agents
+.github
+docs
+*.md
+.env*.local
+.DS_Store
