@@ -1,0 +1,284 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 8px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 28px;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+/* Glass Card styling */
+.card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: 0 4px 24px rgba(14, 165, 233, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(14, 165, 233, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Score Section */
+.scoreList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.scoreItem {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.scoreItem:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.scoreTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.countryInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.flag {
+  font-size: 24px;
+}
+
+.countryName {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.scoreValue {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+/* Chart */
+.chartContainer {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chartRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chartLabel {
+  width: 120px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.chartBarWrapper {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.chartBar {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chartValue {
+  width: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: right;
+  color: var(--text-primary);
+}
+
+/* Plan & Details */
+.planList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.planItem {
+  display: flex;
+  gap: 16px;
+}
+
+.planIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent-glow);
+  color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.planContent h4 {
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.planContent p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Simulation Section */
+.simCard {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.05) 0%, rgba(2, 132, 199, 0.1) 100%);
+  border-color: rgba(14, 165, 233, 0.2);
+}
+
+.simBadge {
+  background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+  color: white;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.simGroups {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.simGroup {
+  min-width: 140px;
+  background: var(--bg-secondary);
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.simGroupName {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.simGroupStat {
+  font-size: 24px;
+  font-family: var(--font-heading);
+  color: #8b5cf6;
+  font-weight: 700;
+}
+
+.simGroupLabel {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* Knowledge Base */
+.kbList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kbItem {
+  padding: 16px;
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  border-left: 4px solid var(--warning);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.kbItem h4 {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+}
+
+.kbItem p {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
