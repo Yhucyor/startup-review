@@ -245,3 +245,81 @@ test('O07: Cancel khi LLM đang chạy: kết quả về muộn không kích ho�
   assert.equal(finalState.completedNodes.includes('policy'), false);
   assert.equal(finalState.artifacts.proposalId, undefined);
 });
+
+test('LC06b: Dọn sạch proposal cũ khi retry localization (Clean Slate Retry)', async () => {
+  let shouldFail = false;
+  const orchestrator = new PrepareListingOrchestrator({
+    handlers: {
+      localization: async (content, locale) => {
+        if (shouldFail) {
+          throw new Error('Localization retry failed');
+        }
+        return {
+          title: `[${locale.toUpperCase()}] ${content.title}`,
+          description: `[${locale.toUpperCase()}] ${content.description}`,
+          locale,
+        };
+      },
+    },
+  });
+
+  const input = createDummyInput({ targetLocale: 'th' });
+  const initialState = await orchestrator.start(input);
+  assert.equal(initialState.status, 'waiting_approval');
+  assert.ok(initialState.artifacts.proposalId);
+  assert.ok(initialState.artifacts.proposalData);
+  assert.ok(initialState.artifacts.assembledData);
+
+  // Kích hoạt retry nhưng bước dịch thất bại
+  shouldFail = true;
+  await assert.rejects(
+    async () => {
+      await orchestrator.retryStep(
+        initialState.runId,
+        'localization',
+        input.productSnapshot
+      );
+    },
+    (err) => {
+      assert.ok(err.message.includes('Localization retry failed'));
+      return true;
+    }
+  );
+
+  const retryState = await orchestrator.getCheckpointer().load(initialState.runId);
+  assert.ok(retryState);
+  assert.equal(retryState.status, 'failed');
+  assert.equal(retryState.artifacts.proposalId, undefined);
+  assert.equal(retryState.artifacts.proposalData, undefined);
+  assert.equal(retryState.artifacts.assembledData, undefined);
+  assert.equal(retryState.artifacts.localizationData, undefined);
+  // Content và Keywords vẫn còn
+  assert.ok(retryState.artifacts.contentData);
+  assert.ok(retryState.artifacts.keywordsData);
+});
+
+test('LC09: Chặn tự động duyệt khi bản dịch cần review (Downstream Policy Gate)', async () => {
+  const orchestrator = new PrepareListingOrchestrator({
+    handlers: {
+      localization: async (content, locale) => {
+        return {
+          title: `[${locale.toUpperCase()}] ${content.title}`,
+          description: `[${locale.toUpperCase()}] ${content.description}`,
+          locale,
+          needsReview: true,
+          warnings: ['Có thông số chưa thể xác nhận chắc chắn'],
+        };
+      },
+    },
+  });
+
+  const input = createDummyInput({ targetLocale: 'th' });
+  const state = await orchestrator.start(input);
+
+  assert.equal(state.status, 'waiting_approval');
+  assert.equal(state.artifacts.proposalData?.requiresHumanReview, true);
+  assert.ok(
+    state.artifacts.proposalData?.blockingReasons?.some((r) => r.includes('cần người bán duyệt lại'))
+  );
+  assert.ok(state.warnings.some((w) => w.includes('cần người bán duyệt lại')));
+});
