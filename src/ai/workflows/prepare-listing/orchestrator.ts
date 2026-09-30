@@ -1,5 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { InMemoryCheckpointer } from './checkpointer.ts';
+import { localizeContent } from '../../agents/localization/index.ts';
+import { ModelCallGateway } from '../../model-call/index.ts';
 import type {
   ApprovalEvent,
   AssembledArtifact,
@@ -27,6 +29,7 @@ export interface NodeHandlers {
 export class PrepareListingOrchestrator {
   private checkpointer: ICheckpointer;
   private handlers: NodeHandlers;
+  private gateway: ModelCallGateway;
   public nodeCallCounts: Record<string, number> = {
     content: 0,
     keywords: 0,
@@ -34,9 +37,14 @@ export class PrepareListingOrchestrator {
     review: 0,
   };
 
-  constructor(options?: { checkpointer?: ICheckpointer; handlers?: NodeHandlers }) {
+  constructor(options?: {
+    checkpointer?: ICheckpointer;
+    handlers?: NodeHandlers;
+    gateway?: ModelCallGateway;
+  }) {
     this.checkpointer = options?.checkpointer ?? new InMemoryCheckpointer();
     this.handlers = options?.handlers ?? {};
+    this.gateway = options?.gateway ?? new ModelCallGateway();
   }
 
   public getCheckpointer(): ICheckpointer {
@@ -189,9 +197,23 @@ export class PrepareListingOrchestrator {
     state.status = 'running';
     delete state.error;
 
-    if (stepName === 'localization') {
+    if (nodesToClear.includes('localization')) {
       delete state.artifacts.localizationId;
       delete state.artifacts.localizationData;
+    }
+    if (nodesToClear.includes('assemble')) {
+      delete state.artifacts.assembledId;
+      delete state.artifacts.assembledData;
+    }
+    if (nodesToClear.includes('review')) {
+      delete state.artifacts.reviewId;
+      delete state.artifacts.reviewData;
+    }
+    if (nodesToClear.includes('create_proposal') || nodesToClear.includes('policy')) {
+      delete state.artifacts.proposalId;
+      delete state.artifacts.proposalData;
+      delete state.approvedBy;
+      delete state.approvedAt;
     }
 
     await this.checkpointer.save(state);
@@ -287,17 +309,58 @@ export class PrepareListingOrchestrator {
           throw new Error('Content artifact missing for localization');
         }
 
-        const localized = this.handlers.localization
-          ? await this.handlers.localization(
-              state.artifacts.contentData,
-              state.targetLocale,
-              state
-            )
-          : {
-              title: `[${state.targetLocale.toUpperCase()}] ${state.artifacts.contentData.title}`,
-              description: `[${state.targetLocale.toUpperCase()}] ${state.artifacts.contentData.description}`,
-              locale: state.targetLocale,
-            };
+        let localized: LocalizationArtifact;
+        if (this.handlers.localization) {
+          localized = await this.handlers.localization(
+            state.artifacts.contentData,
+            state.targetLocale,
+            state
+          );
+        } else {
+          const facts = Object.entries(snapshot.attributes || {}).map(([k, v], idx) => ({
+            id: `fact_${idx}`,
+            fieldPath: k,
+            value: v,
+          }));
+
+          const locOutput = await localizeContent(
+            {
+              sourceTitle: state.artifacts.contentData.title,
+              sourceDescription: state.artifacts.contentData.description,
+              sourceHighlights: state.artifacts.contentData.highlights,
+              sourceClaims: state.artifacts.contentData.claims,
+              sourceContentHash: state.artifacts.contentData.contentHash || state.snapshotRef.hash,
+              sourceLocale: state.artifacts.contentData.sourceLocale || snapshot.language,
+              targetLocale: state.targetLocale,
+              tenantId: state.tenantId,
+              productFacts: facts,
+            },
+            {
+              tenantId: state.tenantId,
+              mode: state.mode,
+              runId: state.runId,
+              stepId: 'localization',
+              attemptId: state.attemptCounters.localization || 1,
+              deadlineMs: Date.now() + 30000,
+            },
+            this.gateway
+          );
+
+          localized = {
+            title: locOutput.title,
+            description: locOutput.description,
+            highlights: locOutput.highlights,
+            locale: locOutput.locale,
+            status: locOutput.status,
+            claimMappings: locOutput.claimMappings,
+            untranslatedTerms: locOutput.untranslatedTerms,
+            warnings: locOutput.warnings,
+            needsReview: locOutput.needsReview,
+            experimental: locOutput.experimental,
+            sourceContentHash: locOutput.sourceContentHash,
+            glossaryVersion: locOutput.glossaryVersion,
+          };
+        }
 
         if (await this.isCancelled(state)) {
           state.status = 'cancelled';
@@ -377,6 +440,19 @@ export class PrepareListingOrchestrator {
 
         const assembled = state.artifacts.assembledData!;
         const proposalId = `prop_${state.runId}_${Date.now()}`;
+
+        const requiresHumanReview = Boolean(
+          state.artifacts.localizationData?.needsReview ||
+          state.artifacts.localizationData?.experimental
+        );
+        const blockingReasons: string[] = [];
+        if (state.artifacts.localizationData?.needsReview) {
+          blockingReasons.push('Bản dịch chứa cảnh báo hoặc thông số cần người bán duyệt lại');
+        }
+        if (state.artifacts.localizationData?.experimental) {
+          blockingReasons.push('Ngôn ngữ mục tiêu đang ở trạng thái thử nghiệm (experimental)');
+        }
+
         const proposal: ProposalArtifact = {
           proposalId,
           targetStore: state.store,
@@ -385,6 +461,8 @@ export class PrepareListingOrchestrator {
           description: assembled.description,
           hashtags: assembled.hashtags,
           createdAt: new Date().toISOString(),
+          requiresHumanReview,
+          blockingReasons: blockingReasons.length > 0 ? blockingReasons : undefined,
         };
 
         state.artifacts.proposalId = proposalId;
@@ -402,6 +480,10 @@ export class PrepareListingOrchestrator {
           state.status = 'cancelled';
           await this.checkpointer.save(state);
           return state;
+        }
+
+        if (state.artifacts.proposalData?.blockingReasons) {
+          state.warnings.push(...state.artifacts.proposalData.blockingReasons);
         }
 
         state.status = 'waiting_approval';

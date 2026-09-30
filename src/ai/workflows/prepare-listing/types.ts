@@ -32,12 +32,30 @@ export interface WorkflowInput {
 export interface ContentArtifact {
   title: string;
   description: string;
+  highlights?: string[];
+  claims?: Array<{ id?: string; text: string; sourceRefs: string[] }>;
+  contentHash?: string;
+  sourceLocale?: string;
 }
 
 export interface LocalizationArtifact {
   title: string;
   description: string;
   locale: string;
+  highlights?: string[];
+  status?: 'translated' | 'skipped' | 'needs_review' | 'failed';
+  claimMappings?: Array<{
+    translatedSegment: string;
+    sourceFactId?: string;
+    sourceClaimText?: string;
+    confidence: 'verified_exact' | 'inferred' | 'unmapped';
+  }>;
+  untranslatedTerms?: string[];
+  warnings?: string[];
+  needsReview?: boolean;
+  experimental?: boolean;
+  sourceContentHash?: string;
+  glossaryVersion?: string;
 }
 
 export interface AssembledArtifact {
@@ -60,6 +78,8 @@ export interface ProposalArtifact {
   description: string;
   hashtags: string[];
   createdAt: string;
+  requiresHumanReview?: boolean;
+  blockingReasons?: string[];
 }
 
 export interface WorkflowArtifacts {

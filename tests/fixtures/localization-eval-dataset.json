@@ -1,0 +1,226 @@
+{
+  "thai_samples": [
+    {
+      "id": "th_01",
+      "sourceLocale": "vi",
+      "targetLocale": "th",
+      "sourceTitle": "Cà phê Robusta Rang Mộc 500g",
+      "sourceDescription": "Hạt cà phê Robusta Đắk Lắk nguyên chất 500g, vị đậm đà truyền thống.",
+      "brand": "Tech Startup Coffee",
+      "skus": ["CF-ROB-500"],
+      "variantFacts": [{ "sku": "CF-ROB-500", "number": 500, "unit": "g" }],
+      "bannedTerms": ["THB", "฿"]
+    },
+    {
+      "id": "th_02",
+      "sourceLocale": "vi",
+      "targetLocale": "th",
+      "sourceTitle": "Trà Oolong Cầu Đất Hộp 250g",
+      "sourceDescription": "Trà xanh oolong cao cấp 250g từ nông trại Cầu Đất Đà Lạt.",
+      "brand": "Highland Tea",
+      "skus": ["TEA-OOL-250"],
+      "variantFacts": [{ "sku": "TEA-OOL-250", "number": 250, "unit": "g" }],
+      "bannedTerms": ["THB", "฿"]
+    },
+    {
+      "id": "th_03",
+      "sourceLocale": "vi",
+      "targetLocale": "th",
+      "sourceTitle": "Mật Ong Rừng Tây Nguyên Chai 500ml",
+      "sourceDescription": "Mật ong tự nhiên nguyên chất 500ml, thu hoạch từ hoa rừng.",
+      "brand": "Pure Forest",
+      "skus": ["HONEY-500ML"],
+      "variantFacts": [{ "sku": "HONEY-500ML", "number": 500, "unit": "ml" }],
+      "bannedTerms": ["THB", "฿"]
+    },
+    {
+      "id": "th_04",
+      "sourceLocale": "vi",
+      "targetLocale": "th",
+      "sourceTitle": "Hạt Điều Rang Muối Bình Phước Hũ 400g",
+      "sourceDescription": "Hạt điều loại 1 thơm ngon giòn rụm 400g.",
+      "brand": "Viet Nut",
+      "skus": ["NUT-CASHEW-400"],
+      "variantFacts": [{ "sku": "NUT-CASHEW-400", "number": 400, "unit": "g" }],
+      "bannedTerms": ["THB", "฿"]
+    },
+    {
+      "id": "th_05",
+      "sourceLocale": "vi",
+      "targetLocale": "th",
+      "sourceTitle": "Bột Ca Cao Nguyên Chất Đắk Nông 300g",
+      "sourceDescription": "Ca cao nguyên chất không đường 300g tốt cho sức khỏe.",
+      "brand": "Choco Dak",
+      "skus": ["COCOA-300"],
+      "variantFacts": [{ "sku": "COCOA-300", "number": 300, "unit": "g" }],
+      "bannedTerms": ["THB", "฿"]
+    },
+    {
+      "id": "th_06",
+      "sourceLocale": "vi",
+      "targetLocale": "th",
+      "sourceTitle": "Tiêu Đen Phú Quốc Hũ 200g",
+      "sourceDescription": "Hạt tiêu đen cay nồng thơm tự nhiên 200g chuẩn đảo ngọc.",
+      "brand": "Island Spice",
+      "skus": ["PEP-200"],
+      "variantFacts": [{ "sku": "PEP-200", "number": 200, "unit": "g" }],
+      "bannedTerms": ["THB", "฿"]
+    },
+    {
+      "id": "th_07",
+      "sourceLocale": "vi",
+      "targetLocale": "th",
+      "sourceTitle": "Trà Atiso Đà Lạt Túi Lọc 100 gói",
+      "sourceDescription": "Trà atiso túi lọc thanh nhiệt mát gan gồm 100 gói.",
+      "brand": "Dalat Farm",
+      "skus": ["TEA-ATI-100"],
+      "variantFacts": [{ "sku": "TEA-ATI-100", "number": 100, "unit": "gói" }],
+      "bannedTerms": ["THB", "฿"]
+    },
+    {
+      "id": "th_08",
+      "sourceLocale": "vi",
+      "targetLocale": "th",
+      "sourceTitle": "Tinh Bột Nghệ Vàng Hũ 500g",
+      "sourceDescription": "Tinh bột nghệ nguyên chất lọc kỹ 500g giàu curcumin.",
+      "brand": "Herbal Life",
+      "skus": ["TUR-500"],
+      "variantFacts": [{ "sku": "TUR-500", "number": 500, "unit": "g" }],
+      "bannedTerms": ["THB", "฿"]
+    },
+    {
+      "id": "th_09",
+      "sourceLocale": "vi",
+      "targetLocale": "th",
+      "sourceTitle": "Bánh Pía Sóc Trăng Trứng Muối 400g",
+      "sourceDescription": "Bánh pía nhân đậu xanh sầu riêng 400g hương vị miền Tây.",
+      "brand": "Tan Hue Vien",
+      "skus": ["PIA-400"],
+      "variantFacts": [{ "sku": "PIA-400", "number": 400, "unit": "g" }],
+      "bannedTerms": ["THB", "฿"]
+    },
+    {
+      "id": "th_10",
+      "sourceLocale": "vi",
+      "targetLocale": "th",
+      "sourceTitle": "Hạt Mắc Ca Sấy Nứt Vỏ Hộp 500g",
+      "sourceDescription": "Hạt mắc ca Tây Nguyên sấy giòn béo ngậy 500g.",
+      "brand": "Highland Maca",
+      "skus": ["MACA-500"],
+      "variantFacts": [{ "sku": "MACA-500", "number": 500, "unit": "g" }],
+      "bannedTerms": ["THB", "฿"]
+    }
+  ],
+  "english_samples": [
+    {
+      "id": "en_01",
+      "sourceLocale": "vi",
+      "targetLocale": "en",
+      "sourceTitle": "Cà phê Robusta Rang Mộc 500g",
+      "sourceDescription": "Hạt cà phê Robusta Đắk Lắk 500g chuẩn gu Việt.",
+      "brand": "Tech Startup Coffee",
+      "skus": ["CF-ROB-500"],
+      "variantFacts": [{ "sku": "CF-ROB-500", "number": 500, "unit": "g" }],
+      "bannedTerms": ["SGD", "USD", "THB"]
+    },
+    {
+      "id": "en_02",
+      "sourceLocale": "vi",
+      "targetLocale": "en",
+      "sourceTitle": "Trà Oolong Cầu Đất 250g",
+      "sourceDescription": "Trà ô long cao cấp Cầu Đất 250g.",
+      "brand": "Highland Tea",
+      "skus": ["TEA-OOL-250"],
+      "variantFacts": [{ "sku": "TEA-OOL-250", "number": 250, "unit": "g" }],
+      "bannedTerms": ["SGD", "USD"]
+    },
+    {
+      "id": "en_03",
+      "sourceLocale": "vi",
+      "targetLocale": "en",
+      "sourceTitle": "Mật Ong Rừng 500ml",
+      "sourceDescription": "Mật ong tự nhiên chai 500ml.",
+      "brand": "Pure Forest",
+      "skus": ["HONEY-500ML"],
+      "variantFacts": [{ "sku": "HONEY-500ML", "number": 500, "unit": "ml" }],
+      "bannedTerms": ["SGD", "USD"]
+    },
+    {
+      "id": "en_04",
+      "sourceLocale": "vi",
+      "targetLocale": "en",
+      "sourceTitle": "Hạt Điều Rang Muối 400g",
+      "sourceDescription": "Hạt điều Bình Phước giòn thơm 400g.",
+      "brand": "Viet Nut",
+      "skus": ["NUT-CASHEW-400"],
+      "variantFacts": [{ "sku": "NUT-CASHEW-400", "number": 400, "unit": "g" }],
+      "bannedTerms": ["SGD", "USD"]
+    },
+    {
+      "id": "en_05",
+      "sourceLocale": "vi",
+      "targetLocale": "en",
+      "sourceTitle": "Bột Ca Cao 300g",
+      "sourceDescription": "Ca cao nguyên chất túi 300g.",
+      "brand": "Choco Dak",
+      "skus": ["COCOA-300"],
+      "variantFacts": [{ "sku": "COCOA-300", "number": 300, "unit": "g" }],
+      "bannedTerms": ["SGD", "USD"]
+    },
+    {
+      "id": "en_06",
+      "sourceLocale": "vi",
+      "targetLocale": "en",
+      "sourceTitle": "Tiêu Đen Phú Quốc 200g",
+      "sourceDescription": "Hạt tiêu đen 200g chuẩn xuất khẩu.",
+      "brand": "Island Spice",
+      "skus": ["PEP-200"],
+      "variantFacts": [{ "sku": "PEP-200", "number": 200, "unit": "g" }],
+      "bannedTerms": ["SGD", "USD"]
+    },
+    {
+      "id": "en_07",
+      "sourceLocale": "vi",
+      "targetLocale": "en",
+      "sourceTitle": "Trà Atiso Túi Lọc 100 gói",
+      "sourceDescription": "Trà thảo mộc atiso Đà Lạt 100 gói.",
+      "brand": "Dalat Farm",
+      "skus": ["TEA-ATI-100"],
+      "variantFacts": [{ "sku": "TEA-ATI-100", "number": 100, "unit": "gói" }],
+      "bannedTerms": ["SGD", "USD"]
+    },
+    {
+      "id": "en_08",
+      "sourceLocale": "vi",
+      "targetLocale": "en",
+      "sourceTitle": "Tinh Bột Nghệ 500g",
+      "sourceDescription": "Tinh bột nghệ vàng Tây Nguyên 500g.",
+      "brand": "Herbal Life",
+      "skus": ["TUR-500"],
+      "variantFacts": [{ "sku": "TUR-500", "number": 500, "unit": "g" }],
+      "bannedTerms": ["SGD", "USD"]
+    },
+    {
+      "id": "en_09",
+      "sourceLocale": "vi",
+      "targetLocale": "en",
+      "sourceTitle": "Bánh Pía Trứng Muối 400g",
+      "sourceDescription": "Bánh pía truyền thống Sóc Trăng 400g.",
+      "brand": "Tan Hue Vien",
+      "skus": ["PIA-400"],
+      "variantFacts": [{ "sku": "PIA-400", "number": 400, "unit": "g" }],
+      "bannedTerms": ["SGD", "USD"]
+    },
+    {
+      "id": "en_10",
+      "sourceLocale": "vi",
+      "targetLocale": "en",
+      "sourceTitle": "Hạt Mắc Ca Sấy 500g",
+      "sourceDescription": "Hạt mắc ca nứt vỏ hảo hạng 500g.",
+      "brand": "Highland Maca",
+      "skus": ["MACA-500"],
+      "variantFacts": [{ "sku": "MACA-500", "number": 500, "unit": "g" }],
+      "bannedTerms": ["SGD", "USD"]
+    }
+  ]
+}
